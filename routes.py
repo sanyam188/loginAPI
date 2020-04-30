@@ -18,13 +18,23 @@ def fn():
         "username": request.form['username'],
         "psw": hashed,
         })
-        return "saknya"
+        if pt:
+            return "Successful"
     return render_template('index.html')
 @app.route('/registration')
 def reg():
+    
     return render_template('form.html')
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
 def log():
+    if request.method=='POST':
+        passwor=request.form['psw']
+        hashed = bcrypt.hashpw(passwor.encode('utf-8'), bcrypt.gensalt())
+        # db.col.find_one({"username": request.form['username'] })['psw']
+        if bcrypt.checkpw(request.form['psw'].encode('utf-8'),db.col.find_one({"username": request.form['username'] })['psw']):
+            return "Welcome"
+        else:
+            return "Failed"
     return render_template('log.html')
 if __name__=='__main__':
     app.run(debug=True)
