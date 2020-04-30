@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    Please Login
+    <form action="/login" method="POST">
+    <h1>Login</h1>
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="Username" required>
+
+    <label for="password"> Password</label>
+    <input type="password" placeholder="password" name="psw" required>
+
+    <button type="submit">Login</button>
+    </form>
 </body>
 </html>
